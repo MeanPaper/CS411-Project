@@ -12,8 +12,8 @@
 | Member1     |    kf14@illinois.edu   |
 | Member2     |    Xinyi Wei           |
 | Member2     |    xwei16@illinois.edu |
-| Member3     |                        |
-| Member3     |                        |
+| Member3     |    Dongming Liu        |
+| Member3     |    dl35@illinois.edu   |
 
 ## Project Information
 
