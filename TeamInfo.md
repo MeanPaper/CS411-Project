@@ -10,8 +10,8 @@
 | Captain     |  alawini@illinois.edu  |
 | Member1     |    Michael Fadillah    |
 | Member1     |    kf14@illinois.edu   |
-| Member2     |                        |
-| Member2     |                        |
+| Member2     |    Xinyi Wei           |
+| Member2     |    xwei16@illinois.edu |
 | Member3     |                        |
 | Member3     |                        |
 
