@@ -6,8 +6,8 @@
 | ----------- | ---------------------- |
 | TeamID      |        Team-020        |
 | TeamName    |     no_time_to_data    |
-| Captain     |       Abdu Alawini     |
-| Captain     |  alawini@illinois.edu  |
+| Captain     |       jinyuxu2         |
+| Captain     |  jinyuxu2@illinois.edu |
 | Member1     |    Michael Fadillah    |
 | Member1     |    kf14@illinois.edu   |
 | Member2     |    Xinyi Wei           |
