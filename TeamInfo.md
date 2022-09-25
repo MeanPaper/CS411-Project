@@ -25,4 +25,6 @@
 
 ## Project Summary
 
-This is a summary of the project!
+For all undergraduate students, they need to complete a certain amount of credits from general education. Most of the students spend a significant amount of time finding a course they are interested in while trying to maintain a good grade before enrollment.
+This Find My GenEd is to provide an user friendly website for undergraduate students to find a relatively high gpa course under the topic that they are interested in.
+
