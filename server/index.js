@@ -4,20 +4,20 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 //config .env file
-dotenv.config();
+dotenv.config({path: '../.env'});
 
-// console.log(`host: ${process.env.HOST}`);
+console.log(`host: ${process.env.HOST}`);
 
-const nttd_sql_user = {
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-};
+// const nttd_sql_user = {
+//     host: process.env.HOST,
+//     user: process.env.USER,
+//     password: process.env.PASSWORD,
+//     database: process.env.DATABASE
+// };
 
-var connection = mysql.createConnection(nttd_sql_user, {
-    multipleStatements: true
-});
+// var connection = mysql.createConnection(nttd_sql_user, {
+//     multipleStatements: true
+// });
 
 
 const app = express();
