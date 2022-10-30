@@ -1,3 +1,52 @@
+.body{
+  padding: 0;
+  margin: 0;
+  background-color: #000000;
+}
+
+.nav-bar{
+  width: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  overflow: hidden;
+  background-color: #D9D9D9;
+
+}
+
+.nav-bar a{
+  float:left;
+  cursor: pointer;
+  height: inherit;
+  padding: 10px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.nav-bar a:hover{
+  background-color: #c4c4c4;
+  transition: background-color 0.5s ease-in-out;
+}
+.nav-bar a:active{
+  background-color: #9b9b9b;
+}
+
+.nav-home-button{
+  color:#FF0000;
+}
+
+.nav-search-button{
+  color: #000000;
+}
+
+.nav-create-button{
+  color: #2d8230;
+}
+
+.content{
+  margin-top:60px;
+}
+/*
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,3 +88,4 @@
 .read-the-docs {
   color: #888;
 }
+*/
