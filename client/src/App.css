@@ -46,6 +46,32 @@
 .content{
   margin-top:60px;
 }
+
+.subnav-bar{
+  color: #ff0000;
+}
+
+.subnav-bar a{
+  margin: 1px;
+  padding: 5px;
+
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+
+  width: 120px;
+
+}
+
+.subnav-bar a:hover{
+  background: #b6b6b6;
+}
+
+.subnav-bar a:active{
+  background: #a9a9a9;
+}
+
+
 /*
 #root {
   max-width: 1280px;
