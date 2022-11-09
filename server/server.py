@@ -1,11 +1,12 @@
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import mysql.connector
 import random
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 # host_=os.getenv('HOST')
 # user_=os.getenv('USER')
 # password_=os.getenv('PSW')
@@ -19,6 +20,7 @@ mydb = mysql.connector.connect(
 
 
 app = Flask(__name__)
+CORS(app)
 
 # mycursor = mydb.cursor()
 # mycursor.execute("SELECT * FROM Position")
@@ -28,6 +30,10 @@ app = Flask(__name__)
 # myresult = mycursor.fetchall()
 # app_count = mycursor.rowcount
 # mycursor.close()
+
+@app.route('/prof')
+def my_profile():
+    return {"name": "Nagato"}
 
 
 # 1. Insert new user into database
@@ -129,4 +135,5 @@ def find_type_count():
     mycursor.close()
     return jsonify(res)
 
-app.run(debug=False)
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port="5000", debug=False)

@@ -1,24 +1,26 @@
 import { useState, useEffect} from 'react'
+import axios from "axios"
 // import reactLogo from './assets/react.svg'
-import './Components/NavigationBar'
-import './App.css'
+
 import NavigationBar from './Components/NavigationBar'
 import UpdateForm from './Components/UpdateForm'
 import SearchBar from './Components/SearchBar'
 import SubNavBar from './Components/SubNavBar'
-// import '../../.env';
+import './App.css'
 
+const url = "http://127.0.0.1:5000"
 
 function App() {
   // const [count, setCount] = useState(0)
-  // const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(null);
 
-  // useEffect(()=>{
-  //   fetch("http://localhost:3000")
-  //   .then((res) => res.json())
-  //   .then((data)=> setMessage(data.message));
-  // },[]);
+  useEffect(()=>{
+    fetch(`http://127.0.0.1:5000/prof`)
+    .then((response) => response.json())
+    .then((data)=>{setMessage(data)});
+  },[]);
   
+
   // console.log(process.env.USER);
   const [loadForm, setloadForm] = useState(0);  // determine what component to be display
   const [current_form, set_current_form] = useState('');
