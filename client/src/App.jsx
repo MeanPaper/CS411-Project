@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import reactLogo from './assets/react.svg'
+// import reactLogo from './assets/react.svg'
 import './Components/NavigationBar'
 import './App.css'
 import NavigationBar from './Components/NavigationBar'
@@ -20,36 +20,47 @@ function App() {
   // },[]);
   
   // console.log(process.env.USER);
-  const [loadForm, setloadForm] = useState(0); 
-  
+  const [loadForm, setloadForm] = useState(0);  // determine what component to be display
+  const [current_form, set_current_form] = useState('');
+
   function openForm(state){
-    setloadForm(state);
+    setloadForm(state);  // setting the state of the website
   }
   
-  function conditionalLoading(){
+  function set_request_form(state_string){
+    set_current_form(state_string);
+  }
+
+  function conditionalLoading(){  // base on loadForm state to determine what components 
+                                  // need to be loaded
     switch(loadForm){
-      case 1:
+      case 1:         // use by update course lists or database, may use a separate html page for
+                      // this instead of loading everything in one single page
         return (
-          <div>
-            <SubNavBar/> 
-            <UpdateForm/>
+          <div className='update-table-component'>
+            <SubNavBar
+              set_request_form={set_request_form}
+            />   
+            <UpdateForm
+              current_form={current_form}
+            />
           </div>)
-      case 2:
-        return <SearchBar/>
+      case 2:         // use by search bar
+        return <SearchBar
+                loadForm={loadForm}
+                setloadForm={setloadForm}
+                />
       default: break;
     }
   }
   return (
     <div className="App">
-      <NavigationBar 
+      <NavigationBar          // this is a permanent flow bar in all pages
         openForm = {openForm}
       />
       <div className='content'>
-        {conditionalLoading()}
-        <h1 style={{lineHeight: 1.5}}>Hello 土狗OwenXu🐶🐶🐶🐶🐶 
-        臭傻子 我是你爹，你爹没文化，对不起你。
-        你爹跟韩国TA在一起了， Owenxu 是大傻子，他每天都很伤心因为大家都打他，
-        他妈Owenxu吃了二十八粒打胎药，没把他打死</h1>
+        {conditionalLoading()}  
+        <h1 style={{lineHeight: 1.5}}>Hello</h1>
 
       </div>
     </div>

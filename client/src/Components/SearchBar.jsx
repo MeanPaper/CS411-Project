@@ -1,24 +1,26 @@
 import React from 'react'
 
 
-const SearchBar = () => {
+const SearchBar = ({loadForm,setloadForm}) => {
     
     const [searchMessage, setSearchMessage] = React.useState(''); // setting the message of the place
-    const placeholder_txt = 'Search for course';
+    const placeholder_txt = 'Search for course';                  // place_holder for the course
     
     const handleChange = (msg) =>{ // handle on change in the text box
         msg.preventDefault();
         setSearchMessage(msg.target.value);
-        console.log(searchMessage);
+        // console.log(searchMessage);
     }
 
-    const printHello = () => { // print the content
-        console.log('hello');    
+    const printHello = (event) => { // print the content
+        event.preventDefault();     // prevent the page from refreshing
+        setloadForm(2);             // force load form to reload the component  
+        console.log('hello');      
     }
 
     return(
         <div className = 'search-bar'>
-            <form className = 'search' onSubmit={()=>printHello()}>
+            <form className = 'search' onSubmit={printHello}>
                 <input type='text' 
                     placeholder={placeholder_txt} 
                     onChange={handleChange}

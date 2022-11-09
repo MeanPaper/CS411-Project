@@ -51,15 +51,14 @@
   color: #ff0000;
 }
 
-.subnav-bar a{
-  margin: 1px;
-  padding: 5px;
+.subnav-bar{
+  display: block;
 
   cursor: pointer;
   border-radius: 5px;
-  text-align: center;
-
-  width: 150px;
+  border: #2d8230;
+  border-radius: 5px;
+  width: 500px;
 
 }
 
@@ -71,7 +70,16 @@
   background: #a9a9a9;
 }
 
-
+.subnav-update-button,
+.subnav-delete-button,
+.subnav-insert-button{
+  display: inline-block;
+  margin: 5px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  width: 80px;
+}
 /*
 #root {
   max-width: 1280px;
