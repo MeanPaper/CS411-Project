@@ -15,12 +15,21 @@ function App() {
   const [message, setMessage] = useState(null);
 
   useEffect(()=>{
-    fetch(`http://127.0.0.1:5000/prof`)
-    .then((response) => response.json())
-    .then((data)=>{setMessage(data)});
+    // fetch(`${url}/prof`)
+    // .then((response) => {
+    //   console.log(response)
+    //   return response.json()
+    // })
+    // .then((data)=>{setMessage(data)});
+    axios.get(`${url}/prof`).then(response => {
+      console.log(response);
+      setMessage(response.data);
+    }).catch(error=>{
+      console.log(error.toJSON());
+    })
   },[]);
   
-
+  console.log(message);
   // console.log(process.env.USER);
   const [loadForm, setloadForm] = useState(0);  // determine what component to be display
   const [current_form, set_current_form] = useState('');
