@@ -51,15 +51,14 @@
   color: #ff0000;
 }
 
-.subnav-bar a{
-  margin: 1px;
-  padding: 5px;
+.subnav-bar{
+  display: block;
 
   cursor: pointer;
   border-radius: 5px;
-  text-align: center;
-
-  width: 150px;
+  border: #2d8230;
+  border-radius: 5px;
+  width: 500px;
 
 }
 
@@ -71,7 +70,73 @@
   background: #a9a9a9;
 }
 
+.subnav-update-button,
+.subnav-delete-button,
+.subnav-insert-button{
+  display: inline-block;
+  margin: 5px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  width: fit-content;
+}
 
+.result-title-block{
+  display: flex;
+}
+.subject-row{
+  display: flex;
+}
+
+.subject-col{
+  display: block;
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+}
+
+.Professor-col{
+  width: 200px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Department-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Number-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Title-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Section-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Term-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.A-Rate-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center; 
+}
 /*
 #root {
   max-width: 1280px;
