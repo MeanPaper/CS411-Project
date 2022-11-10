@@ -2,9 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-const UpdateForm = ({current_form}) => {
+const UserSetting = ({current_form}) => {
     const[firstData, setfirstData] = React.useState('');
     const[secondData, setSecondData] = React.useState('');
+
+    React.useEffect(()=>{
+        setSecondData('')
+        setfirstData('')
+    },[current_form])
 
     const universal_submit_request = (event) => {
         event.preventDefault();
@@ -62,8 +67,6 @@ const UpdateForm = ({current_form}) => {
         }
     }
 
-    
-    
     // on change handler
     const handleFirstChange = (msg) => {
         setfirstData(msg.target.value);
@@ -74,7 +77,7 @@ const UpdateForm = ({current_form}) => {
         // console.log(secondData);
     }
     
-    const Update = () => {
+    const UpdateUserAcc = () => {
         return(<div>
                 <h2>Update Password</h2>
                     <form onSubmit={updatePassword}>
@@ -87,7 +90,7 @@ const UpdateForm = ({current_form}) => {
             </div>);
     }
     
-    const Register = () => {
+    const RegisterUserAcc = () => {
         return(<div>
             <h2>Register User</h2>
             <form onSubmit={registerUser}>
@@ -113,14 +116,12 @@ const UpdateForm = ({current_form}) => {
         </div>);
     }
     
-    const Delete = () =>{
+    const DeleteUserAcc = () =>{
         return(<div>
             <h2>Delete Current Course</h2>
             <form onSubmit={deleterUser}>
                 <div>Email:</div>
                 <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
-                {/* <label>Last name:</label>
-                <input type="text" onChange={handleSecondChange} id="lname" name="lname"/> */}
                 <div><button type='submit'> Delete </button></div>
             </form>
         </div>);
@@ -129,13 +130,13 @@ const UpdateForm = ({current_form}) => {
     function set_form(current_form){
         switch(current_form){
             case 'update':
-                return Update();
+                return UpdateUserAcc();
             case 'delete':
-                return Delete();
+                return DeleteUserAcc();
             case 'insert':
                 return Insert();
             case 'register':
-                return Register();
+                return RegisterUserAcc();
             default: break;
         }
     }
@@ -145,4 +146,4 @@ const UpdateForm = ({current_form}) => {
         </div>);
 };
 
-export default UpdateForm;
+export default UserSetting;

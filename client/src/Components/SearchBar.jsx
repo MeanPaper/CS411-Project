@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {nanoid} from 'nanoid'
+import { useEffect } from 'react';
 
 
 const columnNames = ["Professor","Department","Number","Title","Section","Term","A-Rate"];
@@ -10,9 +11,13 @@ const SearchBar = ({loadForm,setloadForm}) => {
     const [searchMessage, setSearchMessage] = React.useState(''); // setting the message of the place
     const [searchNum, setSearchNum] = React.useState('');
     const [result, setResult] = React.useState([]);
+    const [previousResult, setPreviousResult] = React.useState(['','']);
     
-    const placeholder_txt = 'Search for course';                  // place_holder for the course
-    
+    // saving the previous message
+    React.useEffect(()=>{
+        setPreviousResult([searchMessage, searchNum]);
+    },[result]);
+
     const handleDepChange = (msg) =>{ // handle on change in the text box
         msg.preventDefault();
         setSearchMessage(msg.target.value);
@@ -24,20 +29,19 @@ const SearchBar = ({loadForm,setloadForm}) => {
         setSearchNum(msg.target.value);
         // console.log(searchMessage);
     }
-    const printHello = (event) => { // print the content
-        //event.preventDefault();     // prevent the page from refreshing
-        setloadForm(2);             // force load form to reload the component  
-        console.log('hello');      
-    }
     
     // handle search requests
     const handleSearchSubmit = async (event)=>{
         event.preventDefault();
         try{
+            if(previousResult[0]==searchMessage && previousResult[1]==searchNum){
+               return  
+            }
             //?subject=${searchMessage}&cNumber=${searchNum}
             if(searchMessage === '' || searchNum === '' || !(/^\d+$/.test(searchNum))){
                 return
             }
+            // console.log('get')
             await axios.get(`http://127.0.0.1:5000/search_course?subject=${searchMessage}&cNumber=${searchNum}`)
                         .then(response => {
                             if(response.data && !response.data.length){

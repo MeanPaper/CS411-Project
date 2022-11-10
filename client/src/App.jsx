@@ -3,7 +3,7 @@ import axios from "axios"
 // import reactLogo from './assets/react.svg'
 
 import NavigationBar from './Components/NavigationBar'
-import UpdateForm from './Components/UpdateForm'
+import UserSetting from './Components/UserSetting'
 import SearchBar from './Components/SearchBar'
 import SubNavBar from './Components/SubNavBar'
 import './App.css'
@@ -11,7 +11,7 @@ import './App.css'
 // import '../../.env';
 
 
-const url = "http://127.0.0.1:5000"
+// const url = "http://127.0.0.1:5000"
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -53,6 +53,7 @@ function App() {
           });
     }
     catch(error){
+        alert("Gened type does not exist! Please Try Again")
         console.log(error.message);
     }
   }
@@ -79,7 +80,7 @@ function App() {
             <SubNavBar
               set_request_form={set_request_form}
             />   
-            <UpdateForm
+            <UserSetting
               current_form={current_form}
             />
           </div>)
