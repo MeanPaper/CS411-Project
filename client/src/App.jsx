@@ -7,10 +7,7 @@ import UpdateForm from './Components/UpdateForm'
 import SearchBar from './Components/SearchBar'
 import SubNavBar from './Components/SubNavBar'
 import './App.css'
-import NavigationBar from './Components/NavigationBar'
-import UpdateForm from './Components/UpdateForm'
-import SearchBar from './Components/SearchBar'
-import SubNavBar from './Components/SubNavBar'
+
 // import '../../.env';
 
 

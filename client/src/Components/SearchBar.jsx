@@ -35,7 +35,7 @@ const SearchBar = ({loadForm,setloadForm}) => {
         event.preventDefault();
         try{
             //?subject=${searchMessage}&cNumber=${searchNum}
-            if(searchMessage === '' || searchNum === ''){
+            if(searchMessage === '' || searchNum === '' || !(/^\d+$/.test(searchNum))){
                 return
             }
             await axios.get(`http://127.0.0.1:5000/search_course?subject=${searchMessage}&cNumber=${searchNum}`)
