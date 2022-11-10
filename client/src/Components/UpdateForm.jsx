@@ -1,55 +1,131 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const Update = () => {
-    const universal_submit_request = (event) => {
-        event.preventDefault();
-    }
-    return(<div>
-            <h2>Update Current Course</h2>
-                <form onSubmit={universal_submit_request}>
-                <label>First name:</label>
-                <input type="text" id="fname" name="fname"/>
-                <label>Last name:</label>
-                <input type="text" id="lname" name="lname"/>
-                <button type='submit'> Submit </button>
-            </form>
-        </div>);
-}
-
-const Insert = () => {
-    const universal_submit_request = (event) => {
-        event.preventDefault();
-    }
-    return(<div>
-        <h2>Insert New Course</h2>
-            <form onSubmit={universal_submit_request}>
-            <label>First name:</label>
-            <input type="text" id="fname" name="fname"/>
-            <label>Last name:</label>
-            <input type="text" id="lname" name="lname"/>
-            <button type='submit'> Submit </button>
-        </form>
-    </div>);
-}
-
-const Delete = () =>{
-    const universal_submit_request = (event) => {
-        event.preventDefault();
-    }
-    return(<div>
-        <h2>Delete Current Course</h2>
-        <form onSubmit={universal_submit_request}>
-            <label>First name:</label>
-            <input type="text" id="fname" name="fname"/>
-            <label>Last name:</label>
-            <input type="text" id="lname" name="lname"/>
-            <button type='submit'> Submit </button>
-        </form>
-    </div>);
-}
+import axios from 'axios';
 
 const UpdateForm = ({current_form}) => {
+    const[firstData, setfirstData] = React.useState('');
+    const[secondData, setSecondData] = React.useState('');
+
+    const universal_submit_request = (event) => {
+        event.preventDefault();
+        console.log(`${firstData}, ${secondData}`);
+    }
+
+    // register user
+    const registerUser = async (event) => {
+        event.preventDefault();
+        try{
+            console.log('register');
+            const response = await axios.post(`http://127.0.0.1:5000/register`,{
+                email: firstData,
+                password: secondData
+            })
+            console.log(response.data);
+        }
+        catch(error){
+            alert(error);
+            console.log("POST Failed");
+        }
+    }
+
+    //delete user
+    const deleterUser = async (event) => {
+        event.preventDefault();
+        try{
+            console.log('delete');
+            const response = await axios.delete(`http://127.0.0.1:5000/delete_user`,{ data:{
+                email: firstData}
+            })
+            console.log(response.data);
+        }
+        catch(error){
+            alert(error);
+            console.log("Delete Failed");
+        }
+    }
+
+    //update user password
+    const updatePassword = async (event) => {
+        event.preventDefault();
+        try{
+            console.log('update password');
+            const response = await axios.put(`http://127.0.0.1:5000/update_password`,{
+                    email: firstData,
+                    password: secondData
+                }
+            )
+            console.log(response.data);
+        }
+        catch(error){
+            alert(error);
+            console.log("Update Failed");
+        }
+    }
+
+    
+    
+    // on change handler
+    const handleFirstChange = (msg) => {
+        setfirstData(msg.target.value);
+        // console.log(data);
+    }
+    const handleSecondChange = (msg) => {
+        setSecondData(msg.target.value);
+        // console.log(secondData);
+    }
+    
+    const Update = () => {
+        return(<div>
+                <h2>Update Password</h2>
+                    <form onSubmit={updatePassword}>
+                    <div>Email:</div>
+                    <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                    <div>Password:</div>
+                    <input type="text" onChange={handleSecondChange} id="lname" name="lname"/>
+                    <div><button type='submit'> Submit </button></div>
+                </form>
+            </div>);
+    }
+    
+    const Register = () => {
+        return(<div>
+            <h2>Register User</h2>
+            <form onSubmit={registerUser}>
+                <div>Email:</div>
+                <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                <div>Password:</div>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname"/>
+                <div><button type='submit'> Register </button></div>
+            </form>
+        </div>);
+    }
+
+    const Insert = () => {
+        return(<div>
+            <h2>Comment Log</h2>
+            <form onSubmit={universal_submit_request}>
+                <div>Email:</div>
+                <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                <div>No.:</div>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname"/>
+                <div><button type='submit'> Submit </button></div>
+            </form>
+        </div>);
+    }
+    
+    const Delete = () =>{
+        return(<div>
+            <h2>Delete Current Course</h2>
+            <form onSubmit={deleterUser}>
+                <div>Email:</div>
+                <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                {/* <label>Last name:</label>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname"/> */}
+                <div><button type='submit'> Delete </button></div>
+            </form>
+        </div>);
+    }
+
     function set_form(current_form){
         switch(current_form){
             case 'update':
@@ -58,6 +134,8 @@ const UpdateForm = ({current_form}) => {
                 return Delete();
             case 'insert':
                 return Insert();
+            case 'register':
+                return Register();
             default: break;
         }
     }

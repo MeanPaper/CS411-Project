@@ -78,7 +78,64 @@
   text-align: center;
   padding: 5px;
   border-radius: 5px;
-  width: 80px;
+  width: fit-content;
+}
+
+.result-title-block{
+  display: flex;
+}
+.subject-row{
+  display: flex;
+}
+
+.subject-col{
+  display: block;
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+}
+
+.Professor-col{
+  width: 200px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Department-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Number-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Title-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Section-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.Term-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.A-Rate-col{
+  width: 100px;
+  margin: 5px;
+  padding: 2px;
+  text-align: center; 
 }
 /*
 #root {

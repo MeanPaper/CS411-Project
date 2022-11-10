@@ -14,11 +14,13 @@ const SubNavBar = ({set_request_form}) => {
     return(
         <div className='subnav-bar'>
             <a className='subnav-update-button' style={Selection == 1 ? highlightStyle:{background: "inherit"}} 
-                onClick={()=>holdSelection(1, 'update')}> Update </a>
+                onClick={()=>holdSelection(1, 'update')}> Update Password </a>
             <a className='subnav-delete-button' style={Selection == 2 ? highlightStyle:{background: "inherit"}} 
-                onClick={()=>holdSelection(2, 'delete')}> Delete </a>
+                onClick={()=>holdSelection(2, 'delete')}> Delete User </a>
             <a className='subnav-insert-button' style={Selection == 3 ? highlightStyle:{background: "inherit"}} 
-                onClick={()=>holdSelection(3, 'insert')}> Insert </a>
+                onClick={()=>holdSelection(3, 'insert')}> Comment Log</a>
+            <a className='subnav-insert-button' style={Selection == 4 ? highlightStyle:{background: "inherit"}} 
+                onClick={()=>holdSelection(4, 'register')}> Register User </a>
         </div>);
 };
 
