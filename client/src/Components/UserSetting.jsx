@@ -5,9 +5,11 @@ import axios from 'axios';
 const UserSetting = ({current_form}) => {
     const[firstData, setfirstData] = React.useState('');
     const[secondData, setSecondData] = React.useState('');
+    
+    // const[formData, setFormData] = React.useState({});
 
     React.useEffect(()=>{
-        console.log(firstData + secondData);
+        // console.log(firstData + secondData);
         setSecondData('');
         setfirstData('');
     },[current_form])
@@ -83,9 +85,9 @@ const UserSetting = ({current_form}) => {
                 <h2>Update Password</h2>
                     <form onSubmit={updatePassword}>
                     <div>Email:</div>
-                    <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData}/>
+                    <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
                     <div>Password:</div>
-                    <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData}/>
+                    <input type="password" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
                     <div><button type='submit'> Submit </button></div>
                 </form>
             </div>);
@@ -96,9 +98,9 @@ const UserSetting = ({current_form}) => {
             <h2>Register User</h2>
             <form onSubmit={registerUser}>
                 <div>Email:</div>
-                <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData} />
+                <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
                 <div>Password:</div>
-                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData}/>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
                 <div><button type='submit'> Register </button></div>
             </form>
         </div>);
@@ -109,9 +111,9 @@ const UserSetting = ({current_form}) => {
             <h2>Comment Log</h2>
             <form onSubmit={universal_submit_request}>
                 <div>Email:</div>
-                <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData}/>
+                <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
                 <div>No.:</div>
-                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData}/>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
                 <div><button type='submit'> Submit </button></div>
             </form>
         </div>);
@@ -122,7 +124,7 @@ const UserSetting = ({current_form}) => {
             <h2>Delete Current Course</h2>
             <form onSubmit={deleterUser}>
                 <div>Email:</div>
-                <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData}/>
+                <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
                 <div><button type='submit'> Delete </button></div>
             </form>
         </div>);

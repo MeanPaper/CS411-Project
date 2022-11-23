@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 const columnNames = ["Professor","Department","Number","Title","Section","Term","A-Rate"];
 
-const SearchBar = ({loadForm,setloadForm}) => {
+const SearchBar = () => {
     
     const [searchMessage, setSearchMessage] = React.useState(''); // setting the message of the place
     const [searchNum, setSearchNum] = React.useState('');
