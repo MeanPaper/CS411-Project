@@ -5,11 +5,12 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
-    
-
     // creating log in interface here
     const logInOrOut = (value) => {
         // console.log(logInStatus);
+        if(value == false){
+            window.location.reload(false);  // refresh the page when log out happens
+        }
         setLogInStatus(value);
     }
     
