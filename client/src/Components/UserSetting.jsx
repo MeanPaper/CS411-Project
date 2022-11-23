@@ -7,8 +7,9 @@ const UserSetting = ({current_form}) => {
     const[secondData, setSecondData] = React.useState('');
 
     React.useEffect(()=>{
-        setSecondData('')
-        setfirstData('')
+        console.log(firstData + secondData);
+        setSecondData('');
+        setfirstData('');
     },[current_form])
 
     const universal_submit_request = (event) => {
@@ -82,9 +83,9 @@ const UserSetting = ({current_form}) => {
                 <h2>Update Password</h2>
                     <form onSubmit={updatePassword}>
                     <div>Email:</div>
-                    <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                    <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData}/>
                     <div>Password:</div>
-                    <input type="text" onChange={handleSecondChange} id="lname" name="lname"/>
+                    <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData}/>
                     <div><button type='submit'> Submit </button></div>
                 </form>
             </div>);
@@ -95,9 +96,9 @@ const UserSetting = ({current_form}) => {
             <h2>Register User</h2>
             <form onSubmit={registerUser}>
                 <div>Email:</div>
-                <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData} />
                 <div>Password:</div>
-                <input type="text" onChange={handleSecondChange} id="lname" name="lname"/>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData}/>
                 <div><button type='submit'> Register </button></div>
             </form>
         </div>);
@@ -108,9 +109,9 @@ const UserSetting = ({current_form}) => {
             <h2>Comment Log</h2>
             <form onSubmit={universal_submit_request}>
                 <div>Email:</div>
-                <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData}/>
                 <div>No.:</div>
-                <input type="text" onChange={handleSecondChange} id="lname" name="lname"/>
+                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData}/>
                 <div><button type='submit'> Submit </button></div>
             </form>
         </div>);
@@ -121,7 +122,7 @@ const UserSetting = ({current_form}) => {
             <h2>Delete Current Course</h2>
             <form onSubmit={deleterUser}>
                 <div>Email:</div>
-                <input type="text" onChange={handleFirstChange} id="fname" name="fname"/>
+                <input type="text" onChange={handleFirstChange} id="fname" name="fname" value={firstData}/>
                 <div><button type='submit'> Delete </button></div>
             </form>
         </div>);

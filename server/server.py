@@ -110,6 +110,7 @@ def search_course():
                     Group by subject, cNumber, yearTerm
                     ) W
             WHERE subject= %s AND cNumber= %s
+            ORDER BY W.A_rate DESC
             """
     
     # print(subject)

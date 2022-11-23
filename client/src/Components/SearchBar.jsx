@@ -30,6 +30,7 @@ const SearchBar = ({loadForm,setloadForm}) => {
         // console.log(searchMessage);
     }
     
+
     // handle search requests
     const handleSearchSubmit = async (event)=>{
         event.preventDefault();
@@ -73,17 +74,20 @@ const SearchBar = ({loadForm,setloadForm}) => {
             </form>
         </div>
         <div className='result-title-block'>
-            {columnNames.map(data => {
-               return <div key={nanoid()} className={`${data}-col`}>{(data=='A-Rate')?'A Rate':data}</div>
-            })}
+            {result.length > 0 &&  
+                columnNames.map(data => {
+                    return <div key={nanoid()} className={`${data}-col`}>{(data=='A-Rate')?'A Rate':data}</div>})
+            }
         </div>
-    
-        {result.map(data => <div className='subject-row'
+        {result.length > 0 && result.map(data => <div className='subject-row'
             key={nanoid()}>{
                 data.map(res => <div className='subject-col' style={(res=='ONL')?{color: '#FF0000'}:{color: 'inherit'}} key = {nanoid()}>
                     {res}
                 </div>)
             }</div>)}
+
+
+
         </div>);     
 }
 
