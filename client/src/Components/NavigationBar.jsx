@@ -14,7 +14,6 @@ const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
         setLogInStatus(value);
     }
     
-
     return(
         <div className='nav-bar'>
             <div className='nav-home-button' onClick={()=>openForm(0)}>Home</div>
