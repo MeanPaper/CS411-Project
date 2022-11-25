@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginBox from './LoginBox';
 
 const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
     // creating log in interface here
@@ -16,17 +17,7 @@ const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
         setLogInStatus(value);
     }
     
-    const handleChange = (event) =>{
-        // console.log(loginInfo); // print loginInfo, info works properly
-        // console.log(validPass); 
-        // console.log(typeof event.target.value); // the type of this variable is a string
-        SetLoginInfo(prev=>{
-            if(event.target.name == "password"){    // password validation
-                SetValidPass(event.target.value.length >= 6 && event.target.value.length <= 18); // checking password length
-            }
-            return {...prev ,[event.target.name]: event.target.value}   // setting info object
-        });  
-    }
+
     return(
         <>
             <div className='nav-bar'>
@@ -42,34 +33,7 @@ const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
                         </div>
                     </div>
             </div>
-
-            <div id="id01" className="modal">
-            <form className="modal-content animate">
-                <div onClick={()=>{document.getElementById('id01').style.display='none'}}
-                className="close" title="Close Modal">&times;</div>
-                <div className="imgcontainer">
-                    gg
-                </div>
-
-                <div className="container">
-                <label htmlFor="account"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="account" onChange={handleChange} required/>
-
-                <label htmlFor="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" onChange={handleChange} required/>
-
-                <button type="submit">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember" onChange={handleChange}/> Remember me
-                </label>
-                </div>
-
-                <div className="container" style={{backgroundColor:"#f1f1f1"}}>
-                <button type="button" onClick={()=>{document.getElementById('id01').style.display='none'}} className="cancelbtn">Cancel</button>
-                <span className="psw">Forgot <a href="#">password?</a></span>
-                </div>
-            </form>
-            </div>      
+            <LoginBox validPass={validPass} SetValidPass={SetValidPass}/>    
         </>
     );
 };
