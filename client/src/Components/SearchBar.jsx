@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import {nanoid} from 'nanoid'
-import { useEffect } from 'react';
 
 
 const columnNames = ["Professor","Department","Number","Title","Section","Term","A-Rate"];
