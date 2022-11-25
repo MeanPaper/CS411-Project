@@ -44,7 +44,6 @@ const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
             </div>
 
             <div id="id01" className="modal">
-
             <form className="modal-content animate">
                 <div onClick={()=>{document.getElementById('id01').style.display='none'}}
                 className="close" title="Close Modal">&times;</div>
