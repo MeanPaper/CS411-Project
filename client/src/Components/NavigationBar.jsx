@@ -3,21 +3,24 @@ import LoginBox from './LoginBox';
 
 const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
     // creating log in interface here
-    const[loginInfo, SetLoginInfo] = React.useState({account: "", password: ""});
-    const[validPass, SetValidPass] = React.useState(false);
+    const[loginInfo, setLoginInfo] = React.useState({account: "", password: ""}); // keeps the login form, the data will be clear if login is good
+    const[validPass, setValidPass] = React.useState(false); // password validation
     const logInOrOut = (value) => {
         // console.log(logInStatus);
-    
         if(value == false){
+            setLogInStatus(value); // set login to false
+            setLoginInfo({account:"", password:""}); // clear password
+            setValidPass(false);   // password no long valid
             window.location.reload(false);  // refresh the page when log out happens
         }
         else{
-            document.getElementById('id01').style.display='block'
+            document.getElementById('id01').style.display='block';
         }
-        setLogInStatus(value);
     }
     
-
+    // console.log(logInStatus);
+    // console.log(loginInfo);
+    // console.log(validPass);
     return(
         <>
             <div className='nav-bar'>
@@ -33,7 +36,13 @@ const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
                         </div>
                     </div>
             </div>
-            <LoginBox validPass={validPass} SetValidPass={SetValidPass}/>    
+            <LoginBox 
+                validPass={validPass} 
+                setValidPass={setValidPass}
+                loginInfo={loginInfo}
+                setLoginInfo={setLoginInfo}
+                setLogInStatus={setLogInStatus}
+            />    
         </>
     );
 };
