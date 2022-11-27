@@ -1,6 +1,6 @@
 import React from "react"
 
-const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInStatus}) => {
+const LoginBox = ({loginInfo, setLoginInfo, setLogInStatus}) => {
     
     const [confirmPass, setConfirmPass] = React.useState("");    
 
@@ -10,9 +10,6 @@ const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInSta
         // console.log(validPass); 
         // console.log(typeof event.target.value); // the type of this variable is a string
         setLoginInfo(prev=>{
-            if(event.target.name == "password"){    // password validation
-                setValidPass(event.target.value.length >= 6 && event.target.value.length <= 18); // checking password length
-            }
             return {...prev ,[event.target.name]: event.target.value}   // setting info object
         });  
     }
@@ -25,10 +22,28 @@ const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInSta
     
     const handleLogin = (event) =>{
         event.preventDefault();
-        // process the login request here
+
+        // try{
+        //     console.log('login');
+        //     const response = await axios.post(`http://127.0.0.1:5000/login`,{
+        //         email: loginInfo.account,
+        //         password: loginInfo.password
+        //     })
+        //     console.log(response.data);
+        // }
+        // catch(error){
+        //     alert(error);
+        //     console.log("POST Failed");
+        //     if(loginInfo.account=="dl35@illinois.edu"){
+        //          alert("Account does not exist, please register")
+        //          return;
+        //     }
+        //     alert(password incorrect);
+        // }
         console.log("gogo");    // temp login confirmation
         setLogInStatus(true);
         document.getElementById('id01').style.display='none';
+        setLoginInfo({account: "", password:""});
     }
 
     // register box
@@ -40,42 +55,62 @@ const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInSta
      
     }
     
-
     // this should be async
-    const handleRegister = (event) => {
+    const handleRegister =  async (event) => {
         event.preventDefault(); // this need to be comment because I want the page to refresh upon registering a account
-        if(confirmPass != loginInfo.password && 
-            passwordLenghtGood() && passwordhasDigit() && passwordhasLetter()){
-            console.log("not matching");
+        if(confirmPass != loginInfo.password){
+            document.getElementById('register_form').reset();
+            alert("Password does not match");
         }
+        
+
+   
+        // try{
+        //     console.log('register');
+        //     const response = await axios.post(`http://127.0.0.1:5000/register`,{
+        //         email: loginInfo.account,
+        //         password: loginInfo.password
+        //     })
+        //     if(loginInfo.account=="dl35@illinois.edu"){
+        //          alert("Account exists, please login")
+        //          return;
+        //     }
+        //     console.log(response.data);
+        //    
+        // }
+        // catch(error){
+        //     alert(error);
+        //     console.log("POST Failed");
+        // }
 
         // clean up the password
         setLoginInfo({account: "", password: ""});
         setConfirmPass("");
+    
     }
 
 
     const passwordhasDigit = ()=>{
-        return loginInfo.password.match(/(?=.*\d)/);
+        return (/(?=.*\d)/).test(loginInfo.password); // check if the password has digit
     }
-    const passwordhasLetter = ()=>{
-        return loginInfo.password.match(/(?=.*[A-Z])(?=.*[a-z])/);
+    const passwordhasLetter = ()=>{ // check if the password contains upper and lowercase letter
+        return (/(?=.*[A-Z])(?=.*[a-z])/).test(loginInfo.password);
     }
-    const passwordLenghtGood = () =>{
+    const passwordLenghtGood = () =>{   //validate the password length
         return loginInfo.password.length>=6 && loginInfo.password.length<=18;
     }
     return (
         <>
             <div id="id01" className="modal">
-            <form className="modal-content animate" id='login_form' onSubmit={handleLogin}>
+            <form className="modal-content animate login-register-box" id='login_form' onSubmit={handleLogin}>
                 <div className="container">
 
                     <label htmlFor="account"><b>Email</b></label>
-                    <input type="email" placeholder="Enter Email" name="account"
+                    <input className="login-box-input" type="email" placeholder="Enter Email" name="account"
                         onChange={handleChange} autoComplete="on" required/>
 
                     <label htmlFor="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password"
+                    <input className="login-box-input" type="password" placeholder="Enter Password" name="password"
                         onChange={handleChange} autoComplete='current-password' required/>
                     <div className='create-account'>
                         <span>Don't have a account?</span>
@@ -88,11 +123,11 @@ const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInSta
             </div> 
             
             <div id="id02" className="modal">
-            <form className="modal-content-2 animate" id='register_form' onSubmit={handleRegister}>
+            <form className="modal-content-2 animate login-register-box" id='register_form' onSubmit={handleRegister}>
                 <div className="container">
                     <div className="reg-title"><b>Create New Account</b></div>
                     <label htmlFor="account"><b>Email</b></label>
-                    <input type="email" placeholder="Enter Email" name="account"
+                    <input className="register-box-input" type="email" placeholder="Enter Email" name="account"
                         onChange={handleChange} autoComplete='on' required/>
 
                     <div className="require_rule"> 
@@ -117,17 +152,20 @@ const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInSta
                     </div>
 
                     <label htmlFor="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" 
+                    <input className="register-box-input" type="password" placeholder="Enter Password" name="password" 
                         onChange={handleChange}
-                        autoComplete='current-password' required/>
+                        pattern="[0-9a-zA-Z]{6,18}"
+                        title="Must contain lower-case letters, upper-case letters, digits, and 6 to 18 characters"
+                        autoComplete='new-password' required/>
                     
                     <label htmlFor="confirm_password"><b>Re-Enter Password</b></label>
-                    <input type="password" placeholder="Re-Enter Password" name="confirm_password" 
+                    <input className="register-box-input" type="password" placeholder="Re-Enter Password" name="confirm_password" 
                         autoComplete='on' onChange={handleConfirmChange} required></input>
                     {(confirmPass != loginInfo.password && confirmPass.length > 0) && <div id='not_match_password'>Re-entered password does not match</div>}
 
                     <button className="login-button" type="submit">Register</button>
                     <button className="cancelbtn" type="button" onClick={()=>displayRegisterBox('none')}>Cancel</button>
+                    
                 </div>
             </form>
             </div> 

@@ -7,42 +7,54 @@ const columnNames = ["Professor","Department","Number","Title","Section","Term",
 
 const SearchBar = () => {
     
-    const [searchMessage, setSearchMessage] = React.useState(''); // setting the message of the place
-    const [searchNum, setSearchNum] = React.useState('');
+    const [searchMessage, setSearchMessage] = React.useState({course:"", courseNum:""}); // setting the message of the place
+    // const [searchNum, setSearchNum] = React.useState('');
     const [result, setResult] = React.useState([]);
-    const [previousResult, setPreviousResult] = React.useState(['','']);
+    const [previousResult, setPreviousResult] = React.useState({course:"", courseNum:""});
     
     // saving the previous message
     React.useEffect(()=>{
-        setPreviousResult([searchMessage, searchNum]);
+        setPreviousResult(searchMessage);
     },[result]);
 
-    const handleDepChange = (msg) =>{ // handle on change in the text box
-        msg.preventDefault();
-        setSearchMessage(msg.target.value);
-        // console.log(searchMessage);
-    }
+    // const handleDepChange = (msg) =>{ // handle on change in the text box
+    //     msg.preventDefault();
+    //     setSearchMessage(msg.target.value);
+    //     // console.log(searchMessage);
+    // }
 
-    const handleNumChange = (msg) =>{ // handle on change in the text box
-        msg.preventDefault();
-        setSearchNum(msg.target.value);
-        // console.log(searchMessage);
+    // const handleNumChange = (msg) =>{ // handle on change in the text box
+    //     msg.preventDefault();
+    //     setSearchNum(msg.target.value);
+    //     // console.log(searchMessage);
+    // }
+    
+    const handleSearchMessage = (event) => {
+        // event.preventDefault();
+        setSearchMessage(prev=>{
+            return {...prev, [event.target.name]: event.target.value}
+        });
     }
     
-
+    // console.log(searchMessage)
     // handle search requests
     const handleSearchSubmit = async (event)=>{
         event.preventDefault();
         try{
-            if(previousResult[0]==searchMessage && previousResult[1]==searchNum){
+            
+            if(previousResult.course.toUpperCase() == searchMessage.course.toUpperCase() && 
+                previousResult.courseNum == searchMessage.courseNum){
                return  
             }
-            //?subject=${searchMessage}&cNumber=${searchNum}
-            if(searchMessage === '' || searchNum === '' || !(/^\d+$/.test(searchNum))){
-                return
-            }
+            // console.log("reach")
+            // //?subject=${searchMessage}&cNumber=${searchNum}
+            // if(searchMessage === '' || searchNum === '' || !(/^\d+$/.test(searchNum))){
+            //     return
+            // }
             // console.log('get')
-            await axios.get(`http://127.0.0.1:5000/search_course?subject=${searchMessage}&cNumber=${searchNum}`)
+            let Course = searchMessage.course.toUpperCase();
+            let CourseNum = searchMessage.courseNum;
+            await axios.get(`http://127.0.0.1:5000/search_course?subject=${Course}&cNumber=${CourseNum}`)
                         .then(response => {
                             if(response.data && !response.data.length){
                                 return
@@ -61,14 +73,20 @@ const SearchBar = () => {
         <div className = 'search-bar'>
             <form className = 'search' onSubmit={handleSearchSubmit}>
                 <input type='text' 
+                    title="Course Department, need to letters and abbreviations"
+                    name='course'
                     placeholder='Department'
-                    onChange={handleDepChange}
-                    value={searchMessage}
-                    name='search'></input>
+                    pattern='[A-Za-z]{2,}'
+                    onChange={handleSearchMessage}
+                    value={searchMessage.course} required></input>
+
                 <input type='text'
+                    title="Course Number"
+                    name='courseNum'
                     placeholder='Number'
-                    onChange={handleNumChange}
-                    value={searchNum}></input>
+                    pattern='[0-9]{3,}'
+                    onChange={handleSearchMessage}
+                    value={searchMessage.courseNum} required></input>
                 <button type='submit'> GO </button>
             </form>
         </div>
