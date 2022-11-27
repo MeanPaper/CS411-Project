@@ -1,6 +1,9 @@
 import React from 'react';
 import LoginBox from './LoginBox';
 
+import '../Navbar.css'
+
+
 const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
     // creating log in interface here
     const[loginInfo, setLoginInfo] = React.useState({account: "", password: ""}); // keeps the login form, the data will be clear if login is good

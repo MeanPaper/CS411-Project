@@ -1,16 +1,16 @@
 import { useState, useEffect} from 'react'
 import axios from "axios"
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min";
-
 // import reactLogo from './assets/react.svg'
 
 import NavigationBar from './Components/NavigationBar'
 import UserSetting from './Components/UserSetting'
-import SearchBar from './Components/SearchBar'
 import SubNavBar from './Components/SubNavBar'
+import CourseReview from './Components/CourseReview'
+
 import './App.css'
-import './Navbar.css'
 
 // const url = "http://127.0.0.1:5000"
 
@@ -70,9 +70,8 @@ function App() {
             />
           </div>)
       case 2:         // use by search bar
-        return <SearchBar/>
-                // loadForm={loadForm}
-                // setloadForm={setloadForm}
+        return(<CourseReview logInStatus={logInStatus} />);
+
       case 3: 
         return (<div>
           <form onSubmit={handleCountGenEd}> 
