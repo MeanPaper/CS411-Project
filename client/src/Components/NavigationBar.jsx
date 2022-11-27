@@ -15,6 +15,7 @@ const NavigationBar = ({openForm, logInStatus, setLogInStatus}) => {
         }
         else{
             document.getElementById('id01').style.display='block';
+            document.querySelector('#login_form').reset();
         }
     }
     

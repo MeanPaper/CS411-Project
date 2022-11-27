@@ -108,7 +108,7 @@ input[type=text], input[type=password], input[type=email]{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
-  display: inline-block;
+  display: block;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
@@ -191,10 +191,13 @@ span.psw {
 }
   
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 200px) {
+@media screen and (max-width: 300px) {
   span.psw {
     display: block;
     float: none;
+  }
+  .container{
+    width: 200px;
   }
   .login-button{
     width: 100%;
@@ -223,7 +226,15 @@ span.psw {
   background-color: #fefefe;
   margin: 5px auto; 
   border: 1px solid #888;
-  width: 20%; /* width of the content */
+  width: 50%; /* width of the content */
+  min-width: fit-content;
+}
+
+.modal-content-2 {
+  background-color: #fefefe;
+  margin: 5px auto; 
+  border: 1px solid #888;
+  width: 50%; /* width of the content */
   min-width: fit-content;
 }
 
@@ -264,4 +275,35 @@ span.psw {
 
 .reg-title{
   margin: 10px 0;
+  width: inherit;
+}
+
+.require_rule{
+  width: 100%;
+}
+
+.require_rule{
+  font-style:italic;
+}
+
+.invalid{
+  color: red;
+}
+
+.valid{
+  color: green;
+}
+
+.condition-indicate{
+  padding: 5px;
+  font-size: 20px;
+}
+
+#not_match_password{
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+  font-size: 14px;
+  color: red;
+  
 }

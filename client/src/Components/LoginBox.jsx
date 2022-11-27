@@ -2,7 +2,7 @@ import React from "react"
 
 const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInStatus}) => {
     
-    const [confirmPass, setConfirmPass] = React.useState("");
+    const [confirmPass, setConfirmPass] = React.useState("");    
 
     // this will handle the data change of login as well as register
     const handleChange = (event) =>{   
@@ -34,64 +34,100 @@ const LoginBox = ({validPass, setValidPass, loginInfo, setLoginInfo, setLogInSta
     // register box
     const displayRegisterBox = (value) => {
         setLoginInfo({account: "", password: ""});  // clear the password when the form changes
+        setConfirmPass("");
         document.getElementById('id02').style.display=value;    // setting the display of the element
+        document.querySelector('#register_form').reset();       // reset the entire register form
+     
     }
     
 
     // this should be async
     const handleRegister = (event) => {
         event.preventDefault(); // this need to be comment because I want the page to refresh upon registering a account
-        if(confirmPass != loginInfo.password){
+        if(confirmPass != loginInfo.password && 
+            passwordLenghtGood() && passwordhasDigit() && passwordhasLetter()){
             console.log("not matching");
         }
 
         // clean up the password
         setLoginInfo({account: "", password: ""});
+        setConfirmPass("");
     }
 
+
+    const passwordhasDigit = ()=>{
+        return loginInfo.password.match(/(?=.*\d)/);
+    }
+    const passwordhasLetter = ()=>{
+        return loginInfo.password.match(/(?=.*[A-Z])(?=.*[a-z])/);
+    }
+    const passwordLenghtGood = () =>{
+        return loginInfo.password.length>=6 && loginInfo.password.length<=18;
+    }
     return (
         <>
             <div id="id01" className="modal">
-            <form className="modal-content animate" onSubmit={handleLogin}>
+            <form className="modal-content animate" id='login_form' onSubmit={handleLogin}>
                 <div className="container">
 
-                <label htmlFor="account"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="account" value={loginInfo.account}
-                    onChange={handleChange} autoComplete="on" required/>
+                    <label htmlFor="account"><b>Email</b></label>
+                    <input type="email" placeholder="Enter Email" name="account"
+                        onChange={handleChange} autoComplete="on" required/>
 
-                <label htmlFor="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" value={loginInfo.password}
-                    onChange={handleChange} autoComplete='current-password' required/>
-                <div className='create-account'>
-                    <span>Don't have a account?</span>
-                    <span className='register-acc' onClick={() => displayRegisterBox('block')}>Register</span>
-                </div>
-                <button className="login-button" type="submit">Login</button>
-                <button className="cancelbtn" type="button" onClick={()=>{document.getElementById('id01').style.display='none'}}>Cancel</button>
+                    <label htmlFor="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password"
+                        onChange={handleChange} autoComplete='current-password' required/>
+                    <div className='create-account'>
+                        <span>Don't have a account?</span>
+                        <span className='register-acc' onClick={() => displayRegisterBox('block')}>Register</span>
+                    </div>
+                    <button className="login-button" type="submit">Login</button>
+                    <button className="cancelbtn" type="button" onClick={()=>{document.getElementById('id01').style.display='none'}}>Cancel</button>
                 </div>
             </form>
             </div> 
             
             <div id="id02" className="modal">
-            <form className="modal-content animate" onSubmit={handleRegister}>
+            <form className="modal-content-2 animate" id='register_form' onSubmit={handleRegister}>
                 <div className="container">
-                <h3 className="reg-title"><b>Create New Account</b></h3>
-                <label htmlFor="account"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="account" value={loginInfo.account}
-                    onChange={handleChange} autoComplete='on' required/>
-                
-                <label htmlFor="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" value={loginInfo.password}
-                    onChange={handleChange} autoComplete='current-password' required/>
-                
-                <label><b>Re-Enter Password</b></label>
-                <input type="password" placeholder="Re-Enter Password" autoComplete='on' value={confirmPass} 
-                    onChange={handleConfirmChange}required></input>
+                    <div className="reg-title"><b>Create New Account</b></div>
+                    <label htmlFor="account"><b>Email</b></label>
+                    <input type="email" placeholder="Enter Email" name="account"
+                        onChange={handleChange} autoComplete='on' required/>
 
+                    <div className="require_rule"> 
+                        <div className='rule_title'><b>Password required:</b></div>
+                        <div className={passwordhasDigit() ? 'valid' : 'invalid'}>
+                            <span className='condition-indicate'> 
+                                { passwordhasDigit() ? <>&#x2713;</> : <b>&times; </b>}
+                            </span>
+                            Contains 0-9
+                        </div>
+                        <div className={passwordhasLetter() ? 'valid' : 'invalid'}>
+                            <span className='condition-indicate'> 
+                                {passwordhasLetter() ? <>&#x2713;</> : <b>&times; </b>} 
+                            </span>
+                            Contains A-Z and a-z
+                        </div>
+                        <div className={passwordLenghtGood() ? 'valid' : 'invalid'}>
+                            <span className='condition-indicate'> 
+                            { passwordLenghtGood() ? <>&#x2713;</> : <b>&times; </b>}</span>
+                                Password length: 6-18
+                        </div>
+                    </div>
 
+                    <label htmlFor="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" 
+                        onChange={handleChange}
+                        autoComplete='current-password' required/>
+                    
+                    <label htmlFor="confirm_password"><b>Re-Enter Password</b></label>
+                    <input type="password" placeholder="Re-Enter Password" name="confirm_password" 
+                        autoComplete='on' onChange={handleConfirmChange} required></input>
+                    {(confirmPass != loginInfo.password && confirmPass.length > 0) && <div id='not_match_password'>Re-entered password does not match</div>}
 
-                <button className="login-button" type="submit">Register</button>
-                <button className="cancelbtn" type="button" onClick={()=>displayRegisterBox('none')}>Cancel</button>
+                    <button className="login-button" type="submit">Register</button>
+                    <button className="cancelbtn" type="button" onClick={()=>displayRegisterBox('none')}>Cancel</button>
                 </div>
             </form>
             </div> 
