@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 const UserSetting = ({current_form}) => {
@@ -20,21 +19,21 @@ const UserSetting = ({current_form}) => {
     }
 
     // register user
-    const registerUser = async (event) => {
-        event.preventDefault();
-        try{
-            console.log('register');
-            const response = await axios.post(`http://127.0.0.1:5000/register`,{
-                email: firstData,
-                password: secondData
-            })
-            console.log(response.data);
-        }
-        catch(error){
-            alert(error);
-            console.log("POST Failed");
-        }
-    }
+    // const registerUser = async (event) => {
+    //     event.preventDefault();
+    //     try{
+    //         console.log('register');
+    //         const response = await axios.post(`http://127.0.0.1:5000/register`,{
+    //             email: firstData,
+    //             password: secondData
+    //         })
+    //         console.log(response.data);
+    //     }
+    //     catch(error){
+    //         alert(error);
+    //         console.log("POST Failed");
+    //     }
+    // }
 
     //delete user
     const deleterUser = async (event) => {
@@ -85,26 +84,28 @@ const UserSetting = ({current_form}) => {
                 <h2>Update Password</h2>
                     <form onSubmit={updatePassword}>
                     <div>Email:</div>
-                    <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
+                    <input type="email" onChange={handleFirstChange} id="fname" name="fname" 
+                        autoComplete="username email" value={firstData} required/>
                     <div>Password:</div>
-                    <input type="password" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
+                    <input type="password" onChange={handleSecondChange} id="lname" name="lname" value={secondData} 
+                        autoComplete="on"required/>
                     <div><button type='submit'> Submit </button></div>
                 </form>
             </div>);
     }
     
-    const RegisterUserAcc = () => {
-        return(<div>
-            <h2>Register User</h2>
-            <form onSubmit={registerUser}>
-                <div>Email:</div>
-                <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
-                <div>Password:</div>
-                <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
-                <div><button type='submit'> Register </button></div>
-            </form>
-        </div>);
-    }
+    // const RegisterUserAcc = () => {
+    //     return(<div>
+    //         <h2>Register User</h2>
+    //         <form onSubmit={registerUser}>
+    //             <div>Email:</div>
+    //             <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
+    //             <div>Password:</div>
+    //             <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
+    //             <div><button type='submit'> Register </button></div>
+    //         </form>
+    //     </div>);
+    // }
 
     const Insert = () => {
         return(<div>
@@ -138,8 +139,8 @@ const UserSetting = ({current_form}) => {
                 return DeleteUserAcc();
             case 'insert':
                 return Insert();
-            case 'register':
-                return RegisterUserAcc();
+            // case 'register':
+            //     return RegisterUserAcc();
             default: break;
         }
     }

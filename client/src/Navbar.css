@@ -1,98 +1,312 @@
 .nav-bar{
-    width: 100%;
-    position: fixed;
-    top:0;
-    left:0;
-    overflow: hidden;
-    background-color: #D9D9D9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  width: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  overflow: hidden;
+  background-color: #D9D9D9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
 }
 
 .nav-home-button, 
 .nav-search-button,
 .nav-create-button{
-    cursor: pointer;
-    height: inherit;
-    width: fit-content;
-    padding: 10px;
-    font-weight: 400;
-    text-align: center;
+  cursor: pointer;
+  height: inherit;
+  width: fit-content;
+  padding: 10px;
+  font-weight: 400;
+  text-align: center;
 }
 
 .nav-home-button:hover,
 .nav-search-button:hover,
 .nav-create-button:hover,
 .nav-user-dropdown:hover{
-    background-color: #c4c4c4;
-    transition: background-color 0.5s ease-in-out;
+  background-color: #c4c4c4;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .nav-home-button:active,
 .nav-search-button:active,
 .nav-create-button:active{
-    background-color: #9b9b9b;
+  background-color: #9b9b9b;
 }
 
 .nav-home-button{
-    float:left;
-    color:#FF0000;
+  float:left;
+  color:#FF0000;
 }
 
 .nav-search-button{
-    float:left;
-    color: #000000;
+  float:left;
+  color: #000000;
 }
 
 .nav-create-button{
-    float:left;
-    color: #2d8230;
+  float:left;
+  color: #2d8230;
 }
 
 .nav-user-dropdown {
-    float: right;
-    text-align: center;
-    overflow: hidden;
-    color: #000000;
-    cursor: pointer;
+  float: right;
+  text-align: center;
+  overflow: hidden;
+  color: #000000;
+  cursor: pointer;
 }
-  
+
 .nav-user-dropdown .user-button {
-    border: none;
-    outline: none;
-    padding: 10px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
 }
 
 .dropdown-content {
-    display: none;
-    position: fixed;
-    right: 0;
-    width: fit-content;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  display: none;
+  position: fixed;
+  right: 0;
+  width: fit-content;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  text-decoration: none;
+}
+.dropdown-content div {
+  float: none;
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content div:hover {
+  background-color: #c4c4c4;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.dropdown-content div:active {
+  background-color: #9b9b9b;
+}
+
+.nav-user-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+.login-register-box {
+  border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+.login-box-input,
+.register-box-input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+  
+/* Set a style for all buttons */
+/* button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+} */
+
+.login-button{
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 18px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  float: right;
+  width: auto;
+}
+
+.register-acc{
+  padding: 0 5px;
+  color: rgb(50, 50, 237);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.register-acc:hover{
+  color: #f44336;
+}
+
+.register-acc:active{
+  color: #9a2f28;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
 }
   
-  .dropdown-content div {
-    float: none;
-    color: black;
-    padding: 10px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-  }
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  color: white;
+  border: none;
+  margin: 8px 0;
+  cursor: pointer;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
   
-  .dropdown-content div:hover {
-    background-color: #c4c4c4;
-    transition: background-color 0.5s ease-in-out;
-  }
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+  
+/* Avatar image */
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+  
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
 
-  .dropdown-content div:active {
-    background-color: #9b9b9b;
-  }
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
   
-  .nav-user-dropdown:hover .dropdown-content {
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
     display: block;
+    float: none;
   }
+  .container{
+    width: 200px;
+  }
+  .login-button{
+    width: 100%;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5px auto; 
+  border: 1px solid #888;
+  width: 50%; /* width of the content */
+  min-width: fit-content;
+}
+
+.modal-content-2 {
+  background-color: #fefefe;
+  margin: 5px auto; 
+  border: 1px solid #888;
+  width: 50%; /* width of the content */
+  min-width: fit-content;
+}
+
+/* The Close Button  x */
+.close {
+  position: relative;
+  /* right: 25px; */
+  top: 0;
+  float:right;
+  padding: 10px;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+  
+/* Close button x on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* zoom in and out*/
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+  
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+.reg-title{
+  margin: 10px 0;
+  width: inherit;
+}
+
+.require_rule{
+  width: 100%;
+}
+
+.require_rule{
+  font-style:italic;
+}
+
+.invalid{
+  color: red;
+}
+
+.valid{
+  color: green;
+}
+
+.condition-indicate{
+  padding: 5px;
+  font-size: 20px;
+}
+
+#not_match_password{
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+  font-size: 14px;
+  color: red;
+  
+}
