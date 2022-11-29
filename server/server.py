@@ -20,6 +20,7 @@ mydb = mysql.connector.connect(
 
 
 app = Flask(__name__)
+
 CORS(app)
 
 # mycursor = mydb.cursor()
@@ -182,5 +183,17 @@ def find_type_count():
     mycursor.close()
     return jsonify(res)
 
+def call_sp():
+    mycursor = mydb.cursor()
+
+    mycursor.callproc('aRate')
+    sres = mycursor.stored_results()
+    res = sres.fetchall()
+    # print out the result
+    mycursor.close()
+    return jsonify(res)
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port="5000", debug=False)
+    
+
