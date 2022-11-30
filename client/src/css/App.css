@@ -143,3 +143,25 @@
   color: #888;
 }
 */
+
+.comment-area{
+  width: 500px;
+}
+.comment-title{
+  text-align: left;
+}
+.user-comment-box{
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  padding: 10px;
+  width: 100%;
+  height: 100px;
+  overflow: auto;
+}
+@media screen and (max-width: 300px) {
+  .content{
+    margin-top: 200px;
+  }
+}

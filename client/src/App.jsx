@@ -6,7 +6,7 @@ import CourseReview from './Components/CourseReview'
 import CreateList from './Components/CreateList'
 import UserInterface from './Components/UserInterface'
 import HomePage from './Components/HomePage'
-import './App.css'
+import './css/App.css'
 
 // const url = "http://127.0.0.1:5000"
 

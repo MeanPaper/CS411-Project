@@ -3,7 +3,7 @@ import {Outlet, Link, useNavigate} from 'react-router-dom';
 import LoginBox from './LoginBox';
 import { nanoid } from 'nanoid';
 
-import '../Navbar.css'
+import '../css/Navbar.css'
 
 
 const NavigationBar = ({setToken, logInStatus, setLogInStatus}) => {

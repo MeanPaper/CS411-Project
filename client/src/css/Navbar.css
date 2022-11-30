@@ -48,6 +48,19 @@
   color: #2d8230;
 }
 
+@media screen and (max-width: 300px) {
+  .nav-home-button,
+  .nav-search-button,
+  .nav-create-button,
+  .user-button,
+  .nav-user-dropdown{
+    text-align: left;
+    width: 100%;
+  }
+}
+
+
+
 .nav-user-dropdown {
   float: right;
   text-align: center;
