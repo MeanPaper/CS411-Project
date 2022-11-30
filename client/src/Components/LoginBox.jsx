@@ -1,6 +1,7 @@
 import React from "react"
+import { nanoid } from "nanoid";
 
-const LoginBox = ({loginInfo, setLoginInfo, setLogInStatus}) => {
+const LoginBox = ({setToken, loginInfo, setLoginInfo, setLogInStatus}) => {
     
     const [confirmPass, setConfirmPass] = React.useState("");    
 
@@ -13,7 +14,6 @@ const LoginBox = ({loginInfo, setLoginInfo, setLogInStatus}) => {
             return {...prev ,[event.target.name]: event.target.value}   // setting info object
         });  
     }
-
 
     // re-enter password confirmation handler
     const handleConfirmChange = (event) =>{
@@ -41,6 +41,8 @@ const LoginBox = ({loginInfo, setLoginInfo, setLogInStatus}) => {
         //     alert(password incorrect);
         // }
         console.log("gogo");    // temp login confirmation
+        setToken({'token':nanoid()}); // setting login section status, use a random number generator for this
+        sessionStorage.setItem('web-temp', JSON.stringify({'data': (loginInfo.account)}));   // setting account for the current session
         setLogInStatus(true);
         document.getElementById('id01').style.display='none';
         setLoginInfo({account: "", password:""});

@@ -2,15 +2,22 @@ import React from 'react';
 import axios from 'axios';
 
 const UserSetting = ({current_form}) => {
-    const[firstData, setfirstData] = React.useState('');
+    const[firstData, setfirstData] = React.useState(()=>{
+        const item = sessionStorage.getItem('web-temp');
+        const parseItem = JSON.parse(item);
+        return parseItem.data.length > 0 ? parseItem.data : '';
+    });
+    const[updateUser, setUpdateUser] = React.useState('');
     const[secondData, setSecondData] = React.useState('');
     
+    // console.log(firstData)
     // const[formData, setFormData] = React.useState({});
 
     React.useEffect(()=>{
         // console.log(firstData + secondData);
         setSecondData('');
-        setfirstData('');
+        setUpdateUser('');
+        // setfirstData('');
     },[current_form])
 
     const universal_submit_request = (event) => {
@@ -38,6 +45,10 @@ const UserSetting = ({current_form}) => {
     //delete user
     const deleterUser = async (event) => {
         event.preventDefault();
+        if(firstData != updateUser){
+            console.log("Please enter the correct email");
+            return;
+        }
         try{
             console.log('delete');
             const response = await axios.delete(`http://127.0.0.1:5000/delete_user`,{ data:{
@@ -54,6 +65,10 @@ const UserSetting = ({current_form}) => {
     //update user password
     const updatePassword = async (event) => {
         event.preventDefault();
+        if(firstData != updateUser) {
+            console.log("Please enter the correct email");
+            return;
+        }
         try{
             console.log('update password');
             const response = await axios.put(`http://127.0.0.1:5000/update_password`,{
@@ -84,8 +99,8 @@ const UserSetting = ({current_form}) => {
                 <h2>Update Password</h2>
                     <form onSubmit={updatePassword}>
                     <div>Email:</div>
-                    <input type="email" onChange={handleFirstChange} id="fname" name="fname" 
-                        autoComplete="username email" value={firstData} required/>
+                    <input type="email" placeholder={firstData} id="fname" name="fname" 
+                        autoComplete="username email" onChange={(e)=>setUpdateUser(e.target.value)} value={updateUser}/>
                     <div>Password:</div>
                     <input type="password" onChange={handleSecondChange} id="lname" name="lname" value={secondData} 
                         autoComplete="on"required/>
@@ -124,8 +139,9 @@ const UserSetting = ({current_form}) => {
         return(<div>
             <h2>Delete Current Course</h2>
             <form onSubmit={deleterUser}>
-                <div>Email:</div>
-                <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
+                <div>Please type your email here: </div>
+                <input type="email" placeholder={firstData} onChange={(e)=>setUpdateUser(e.target.value)} 
+                    id="fname" name="fname" value={updateUser} required/>
                 <div><button type='submit'> Delete </button></div>
             </form>
         </div>);
