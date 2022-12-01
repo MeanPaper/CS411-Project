@@ -1,28 +1,56 @@
 import React from "react"
+import axios from "axios"
 
 const Comment = ({logInStatus}) =>{
     const maxCharacters = 400;
     const [userComment, setUserComment] = React.useState('');
+    const noCommentRef = React.useRef();
+    
+    React.useEffect(()=>{
+        if(logInStatus==true){
+            noCommentRef.current.textContent = '';
+        }
+    },[logInStatus]);
 
-    const handleCommentSubmit = (event) => {
-        event.preventDefault();
-        console.log(commentRef.current.value);
+    const handleCommentTyping = (event) =>{
+        setUserComment(event.target.value)
+        noCommentRef.current.textContent='';
     }
-    return (<div className='comment-section'>
-            <div className='comment-area'>
+    const handleCommentSubmit = (event) => {
+        /* TODO: need to use axios here  */
+        event.preventDefault();
+        // console.log(noCommentRef.current);
+        if(userComment.length == 0){
+            noCommentRef.current.textContent = 'Please make some comments :D';
+            return;
+        }
+    }
+
+    return (
+    <div className="comments">
+        <div className='user-comment-section'>
+            <div className='comment-area' aria-disabled={logInStatus==false}>
                 <form className="comment-form" onSubmit={handleCommentSubmit}>
-                    <label htmlFor='comment' className="comment-title">Comment:</label>
+                    <div className="comment-title"><label htmlFor='comment'>Comment:</label></div>
                     <textarea className="user-comment-box"
                         name="comment"
                         maxLength={maxCharacters}
-                        onChange={(e)=>{setUserComment(e.target.value)}}
-                        placeholder="What is your comment... "></textarea>
+                        onChange={handleCommentTyping}
+                        placeholder="What is your comment... "
+                        disabled={logInStatus==false}></textarea> 
+                        {/* if the ref does not work, I will use required for this text area */}
+
+                    {logInStatus && <div className="comment-control">
+                        <div className="character-limit">{userComment.length} / 400 characters</div>
+                        <div ref={noCommentRef} style={{fontSize: '13px', color: 'green'}}></div>
+                        <button className='comment-submit-button' type="submit">Post</button>
+                    </div>}
                 </form>
-                <p>{userComment.length} / 400 characters</p>
-                <button type="submit">Post</button>
-                
             </div>
-        {/* loading all the user comments, and capped the visible comment to 10 most recent post */}
+        </div>
+        <div className='other-user-comment'>
+            <div className='comment-text'></div>
+        </div>
     </div>);   
 }
 

@@ -5,11 +5,11 @@ import {nanoid} from 'nanoid'
 
 const columnNames = ["Professor","Department","Number","Title","Section","Term","A-Rate"];
 
-const SearchBar = () => {
+const SearchBar = ({result, setResult}) => {
     
     const [searchMessage, setSearchMessage] = React.useState({course:"", courseNum:""}); // setting the message of the place
     // const [searchNum, setSearchNum] = React.useState('');
-    const [result, setResult] = React.useState([]);
+    // const [result, setResult] = React.useState([]);
     const [previousResult, setPreviousResult] = React.useState({course:"", courseNum:""});
     
     // saving the previous message
@@ -69,10 +69,11 @@ const SearchBar = () => {
     }
     // render the following component on screen
     return(
-        <div>
+        <div className = "search-content">
         <div className = 'search-bar'>
             <form className = 'search' onSubmit={handleSearchSubmit}>
                 <input type='text' 
+                    className = "search-input"
                     title="Course Department, need to letters and abbreviations"
                     name='course'
                     placeholder='Department'
@@ -82,6 +83,7 @@ const SearchBar = () => {
 
                 <input type='text'
                     title="Course Number"
+                    className = "search-input"
                     name='courseNum'
                     placeholder='Number'
                     pattern='[0-9]{3,}'

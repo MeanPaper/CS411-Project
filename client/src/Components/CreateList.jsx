@@ -28,8 +28,10 @@ const CreateList = ({genEdType, setGenEdType, genEdCount, setGenEdCount}) => {
     
     return (<div>
         <form onSubmit={handleCountGenEd}> 
-          <div>Culture Study Type</div>
-          <input type='text' value={genEdType} onChange={handleGenedTypeTyping}></input>
+          <label htmlFor="gened-entry">Culture Study Type</label>
+          <input type='text' value={genEdType} onChange={handleGenedTypeTyping} name='gened-entry' 
+            title="Please type the gened abbreviation"
+          required></input>
           <div><button type='submit'>Count</button></div>
         </form>
         <h1>Culture Study: {genEdType}</h1>
