@@ -4,7 +4,6 @@ import Comment from "./Comment";
 import SearchBar from "./SearchBar";
 
 const CourseReview = ({logInStatus}) => {
-    
     return (
     <>
         <SearchBar />
