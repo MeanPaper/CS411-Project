@@ -1,10 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import {Outlet, Link, useNavigate} from 'react-router-dom';
+
 
 const UserSetting = ({current_form}) => {
+
+    const navigate = useNavigate();
     const[firstData, setfirstData] = React.useState(()=>{
         const item = sessionStorage.getItem('web-temp');
         const parseItem = JSON.parse(item);
+        if(!parseItem){
+            return '';
+        }
         return parseItem.data.length > 0 ? parseItem.data : '';
     });
     const[updateUser, setUpdateUser] = React.useState('');
@@ -25,23 +32,6 @@ const UserSetting = ({current_form}) => {
         console.log(`${firstData}, ${secondData}`);
     }
 
-    // register user
-    // const registerUser = async (event) => {
-    //     event.preventDefault();
-    //     try{
-    //         console.log('register');
-    //         const response = await axios.post(`http://127.0.0.1:5000/register`,{
-    //             email: firstData,
-    //             password: secondData
-    //         })
-    //         console.log(response.data);
-    //     }
-    //     catch(error){
-    //         alert(error);
-    //         console.log("POST Failed");
-    //     }
-    // }
-
     //delete user
     const deleterUser = async (event) => {
         event.preventDefault();
@@ -60,6 +50,9 @@ const UserSetting = ({current_form}) => {
             alert(error);
             console.log("Delete Failed");
         }
+        sessionStorage.clear();
+        navigate('/');
+        window.location.reload(false);  // refresh the page when log out happens
     }
 
     //update user password
@@ -82,6 +75,8 @@ const UserSetting = ({current_form}) => {
             alert(error);
             console.log("Update Failed");
         }
+        window.location.reload(false);  // refresh the page when log out happens
+        
     }
 
     // on change handler
@@ -109,19 +104,6 @@ const UserSetting = ({current_form}) => {
             </div>);
     }
     
-    // const RegisterUserAcc = () => {
-    //     return(<div>
-    //         <h2>Register User</h2>
-    //         <form onSubmit={registerUser}>
-    //             <div>Email:</div>
-    //             <input type="email" onChange={handleFirstChange} id="fname" name="fname" value={firstData} required/>
-    //             <div>Password:</div>
-    //             <input type="text" onChange={handleSecondChange} id="lname" name="lname" value={secondData} required/>
-    //             <div><button type='submit'> Register </button></div>
-    //         </form>
-    //     </div>);
-    // }
-
     const Insert = () => {
         return(<div>
             <h2>Comment Log</h2>

@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import {nanoid} from "nanoid"
 
-const Comment = ({logInStatus, searchMessage, comments}) =>{
+const Comment = ({logInStatus, searchMessage, comments, setComments}) =>{
     const maxCharacters = 400;
     const [userComment, setUserComment] = React.useState('');
     const noCommentRef = React.useRef();
@@ -13,7 +13,6 @@ const Comment = ({logInStatus, searchMessage, comments}) =>{
         }
     },[logInStatus]);
 
-
     const handleCommentTyping = (event) =>{
         setUserComment(event.target.value)
         noCommentRef.current.textContent='';
@@ -22,6 +21,7 @@ const Comment = ({logInStatus, searchMessage, comments}) =>{
         /* TODO: need to use axios here  */
         event.preventDefault();
         // console.log(noCommentRef.current);
+        // setComments(prev => {prev.push([userComment])});
         if(userComment.length == 0){
             noCommentRef.current.textContent = 'Please make some comments :D';
             return;
@@ -41,18 +41,28 @@ const Comment = ({logInStatus, searchMessage, comments}) =>{
 
             const response = await axios.put(`http://127.0.0.1:5000/insert_comment`, dataObject);
             // console.log(response);
+            let copy = searchMessage.course.toUpperCase();
+            await axios.get(`http://127.0.0.1:5000/get_comment?subject=${copy}&cNumber=${searchMessage.courseNum}`)
+            .then(res => {
+                    setComments(res.data);
+                }
+            )
+            
+
         }
         catch(err){ 
             alert(err);
             console.log(err);
         }
+        document.querySelector('#comment-form').reset();       // reset the entire register form
+
     }
 
     return (
     <div className="comments">
         <div className='user-comment-section'>
             <div className='comment-area' aria-disabled={logInStatus==false}>
-                <form className="comment-form" onSubmit={handleCommentSubmit}>
+                <form className="comment-form" id='comment-form' onSubmit={handleCommentSubmit}>
                     <div className="comment-title"><label htmlFor='comment'>Comment:</label></div>
                     {/* <input type='text' required></input> */}
                     <textarea className="user-comment-box"

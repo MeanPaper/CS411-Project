@@ -19,8 +19,6 @@ const SubNavBar = ({set_request_form}) => {
                 onClick={()=>holdSelection(2, 'delete')}> Delete User </a>
             <a className='subnav-insert-button' style={Selection == 3 ? highlightStyle:{background: "inherit"}} 
                 onClick={()=>holdSelection(3, 'insert')}> Comment Log</a>
-            <a className='subnav-insert-button' style={Selection == 4 ? highlightStyle:{background: "inherit"}} 
-                onClick={()=>holdSelection(4, 'register')}> Register User </a>
         </div>);
 };
 

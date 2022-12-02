@@ -194,8 +194,8 @@ def insert_comment():
     data = request.get_json()
     mycursor = mydb.cursor()
     query = """
-            INSERT INTO Comments (commentID,content,email,subject,cNumber)
-            VALUES (%s, %s, %s, %s, %s);
+            INSERT INTO Comments (commentID,content,email,subject,cNumber,commentTime)
+            VALUES (%s, %s, %s, %s, %s, NOW());
             """
     mycursor.execute(query, (data["commentID"], data["content"], data["email"], data["subject"], data["cNumber"]))
     mydb.commit()
@@ -212,6 +212,7 @@ def get_comment():
             SELECT content
             FROM Comments
             WHERE subject=%s AND cNumber=%s
+            ORDER BY Comments.commentTime Desc
             """
     mycursor.execute(query, (subject, int(cNumber)))
     res = mycursor.fetchall()
