@@ -5,12 +5,16 @@ import SearchBar from "./SearchBar";
 
 const CourseReview = ({logInStatus}) => {
 
-    const [result, setResult] = React.useState([[1]]);
+    const [result, setResult] = React.useState([]);
+    const [searchMessage, setSearchMessage] = React.useState({course:"", courseNum:""}); // setting the message of the place
+    const [comments, setComments] = React.useState([]);
     
     return (
     <div className="course-review-section">
-        <SearchBar result={result} setResult={setResult}/>
-        {result.length > 0 && <Comment logInStatus = {logInStatus} />}
+        <SearchBar result={result} setResult={setResult} 
+            searchMessage={searchMessage} setSearchMessage={setSearchMessage}
+            comments={comments} setComments={setComments}/>
+        {result.length > 0 && <Comment logInStatus = {logInStatus} searchMessage={searchMessage} comments={comments}/>}
     </div>
     );
 }

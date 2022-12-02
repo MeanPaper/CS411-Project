@@ -5,9 +5,8 @@ import {nanoid} from 'nanoid'
 
 const columnNames = ["Professor","Department","Number","Title","Section","Term","A-Rate"];
 
-const SearchBar = ({result, setResult}) => {
+const SearchBar = ({result, setResult, searchMessage, setSearchMessage, comments, setComments}) => {
     
-    const [searchMessage, setSearchMessage] = React.useState({course:"", courseNum:""}); // setting the message of the place
     // const [searchNum, setSearchNum] = React.useState('');
     // const [result, setResult] = React.useState([]);
     const [previousResult, setPreviousResult] = React.useState({course:"", courseNum:""});
@@ -65,7 +64,30 @@ const SearchBar = ({result, setResult}) => {
         }
         catch(error){
             console.log(error.message);
+            if(error){
+                return;
+            };
         }
+        
+        try{
+            if(previousResult.course.toUpperCase() == searchMessage.course.toUpperCase() && 
+                previousResult.courseNum == searchMessage.courseNum){
+               return;
+            }
+            
+            let copy = searchMessage.course.toUpperCase();
+            await axios.get(`http://127.0.0.1:5000/get_comment?subject=${copy}&cNumber=${searchMessage.courseNum}`)
+            .then(res => {
+                    setComments(res.data);
+                }
+            )
+            
+        }
+        catch(err){
+            alert(err);
+            console.log(err);
+        }
+        
     }
     // render the following component on screen
     return(
@@ -89,7 +111,7 @@ const SearchBar = ({result, setResult}) => {
                     pattern='[0-9]{3,}'
                     onChange={handleSearchMessage}
                     value={searchMessage.courseNum} required></input>
-                <button type='submit'> GO </button>
+                <button className="course-search-button" type='submit'> Search </button>
             </form>
         </div>
         <div className='result-title-block'>

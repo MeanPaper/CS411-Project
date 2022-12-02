@@ -1,5 +1,6 @@
 import React from "react"
 import { nanoid } from "nanoid";
+import axios from 'axios';
 
 const LoginBox = ({setToken, loginInfo, setLoginInfo, setLogInStatus}) => {
     
@@ -65,30 +66,28 @@ const LoginBox = ({setToken, loginInfo, setLoginInfo, setLogInStatus}) => {
             alert("Password does not match");
         }
         
-
-   
-        // try{
-        //     console.log('register');
-        //     const response = await axios.post(`http://127.0.0.1:5000/register`,{
-        //         email: loginInfo.account,
-        //         password: loginInfo.password
-        //     })
-        //     if(loginInfo.account=="dl35@illinois.edu"){
-        //          alert("Account exists, please login")
-        //          return;
-        //     }
-        //     console.log(response.data);
-        //    
-        // }
-        // catch(error){
-        //     alert(error);
-        //     console.log("POST Failed");
-        // }
+        try{
+            console.log('register');
+            const response = await axios.post(`http://127.0.0.1:5000/register`,{
+                email: loginInfo.account,
+                password: loginInfo.password
+            })
+            // if(loginInfo.account=="dl35@illinois.edu"){
+            //      alert("Account exists, please login")
+            //      return;
+            // }
+            console.log(response.data);
+           
+        }
+        catch(error){
+            alert(error);
+            console.log("POST Failed");
+        }
 
         // clean up the password
         setLoginInfo({account: "", password: ""});
         setConfirmPass("");
-    
+        window.location.reload(false);  // refresh the page when log out happens
     }
 
 

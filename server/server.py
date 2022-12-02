@@ -164,7 +164,38 @@ def update_user_info():
     mycursor.close()
     return render_template("xxx.html")
 
-# 5. find_type_count
+# 5. Insert comments to the db
+@app.route('/insert_comment', methods=['PUT'])
+def insert_comment():
+    data = request.get_json()
+    mycursor = mydb.cursor()
+    query = """
+            INSERT INTO Comments (commentID,content,email,subject,cNumber)
+            VALUES (%s, %s, %s, %s, %s);
+            """
+    mycursor.execute(query, (data["commentID"], data["content"], data["email"], data["subject"], data["cNumber"]))
+    mydb.commit()
+    mycursor.close()
+    return "Success", 200
+
+# 6. Get comments to the db
+@app.route('/get_comment', methods=['GET'])
+def get_comment():
+    cNumber = request.args.get('cNumber')
+    subject = request.args.get('subject')
+    mycursor = mydb.cursor()
+    query = """
+            SELECT content
+            FROM Comments
+            WHERE subject=%s AND cNumber=%s
+            """
+    mycursor.execute(query, (subject, int(cNumber)))
+    res = mycursor.fetchall()
+    mydb.commit()
+    mycursor.close()
+    return jsonify(res)
+
+# 7. find_type_count
 @app.route('/find_type_count', methods=['GET'])
 def find_type_count():
     # Count how many Gened course are available each year
@@ -183,10 +214,13 @@ def find_type_count():
     mycursor.close()
     return jsonify(res)
 
+
+
+
 def call_sp():
     mycursor = mydb.cursor()
 
-    mycursor.callproc('aRate')
+    mycursor.callproc('ARate')
     sres = mycursor.stored_results()
     res = sres.fetchall()
     # print out the result
@@ -195,5 +229,4 @@ def call_sp():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port="5000", debug=False)
-    
-
+    call_sp()

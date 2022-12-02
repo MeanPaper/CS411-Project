@@ -102,6 +102,7 @@
 button{
   border-radius: 5px;
 }
+
 /*
 #root {
   max-width: 1280px;
@@ -145,6 +146,9 @@ button{
   color: #888;
 }
 */
+input{
+  margin: 5px;  
+}
 
 .course-review-section{
   width: inherit;
@@ -154,14 +158,25 @@ button{
   margin: 5px;
 }
 
+.comment-submit-button,
+.course-search-button{
+  width: fit-content;
+  color: white;
+  border: none;
+  margin: 8px 0;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #3688f4;
+}
+
 .search-content,
 .user-comment-section,
-.other-user-comment{
+.other-user-comment-section{
   padding: 10px 5%;
   margin: 20px; 
   width: inherit;
   max-width: 100%;
-  box-shadow: 0px 0px 7.5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 7.5px rgba(0, 0, 0, 0.2);
   min-width: 200px;
 }
 
@@ -219,4 +234,9 @@ input:focus{
   .content{
     margin-top: 200px;
   }
+}
+
+.comment-text{
+  font-size: 13px;
+  padding: 5px;
 }
