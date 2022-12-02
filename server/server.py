@@ -74,6 +74,28 @@ def update_password():
     mycursor.close()
     return "Success", 200
 
+# 0. Login
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    mycursor = mydb.cursor()
+    check = """Select email FROM NoTimeToData.Users WHERE email = %s"""
+    mycursor.execute(check, (data['email'],))
+    checkres = mycursor.fetchall()
+    if (len(checkres) == 0):
+        return "User Not Exists", 200
+
+    check = """Select password FROM NoTimeToData.Users WHERE email = %s"""
+    mycursor.execute(check, (data['email'],))
+    checkres = mycursor.fetchall()
+    if (str(checkres)[3:-4] != str(data['password'])):
+        print(str(checkres), str(data['password']))
+        return "Wrong Password", 200
+    mydb.commit()
+    mycursor.close()
+    return "Success", 200
+
+
 # 1. Insert new user into database
 @app.route('/register', methods=['POST'])
 def register():
@@ -89,7 +111,10 @@ def register():
     if (len(checkres) >= 1):
         return "User Exists", 200
 
-    query1 = """INSERT INTO NoTimeToData.Users(email, password) VALUES (%s, %s)"""
+    query1 = """
+            INSERT INTO NoTimeToData.Users(email, password) VALUES (%s, %s)
+            """
+
     mycursor.execute(query1, (data['email'], data['password']))
     mydb.commit()
     mycursor.close()
@@ -113,11 +138,8 @@ def search_course():
             WHERE subject= %s AND cNumber= %s
             ORDER BY W.A_rate DESC
             """
-    
-    # print(subject)
-    # print(cNumber)
-
     mycursor.execute(query, (subject, int(cNumber)))
+    
     res = mycursor.fetchall()
     mydb.commit()
     mycursor.close()
@@ -137,6 +159,8 @@ def search_online():
             WHERE schedType = "ONL" AND subject=%s AND cNumber=%s
             """
     mycursor.execute(query, (data["subject"], data["cNumber"]))
+
+    
     res = mycursor.fetchall()
     mydb.commit()
     mycursor.close()
@@ -214,19 +238,40 @@ def find_type_count():
     mycursor.close()
     return jsonify(res)
 
+#8. get recommend list:
+@app.route('/get_recommend_list', methods=['GET'])
+def get_recommend_list():
+    mycursor = mydb.cursor()
+    query = """
+            SELECT * FROM RateTable
+            """
+    mycursor.execute(query)
+    res = mycursor.fetchall()
+    mydb.commit()
+    mycursor.close()
+    return jsonify(res)
 
 
 
 def call_sp():
     mycursor = mydb.cursor()
-
     mycursor.callproc('ARate')
-    sres = mycursor.stored_results()
-    res = sres.fetchall()
+    mydb.commit()
+    # print(mycursor.stored_results())
+
+
+    # for res in mycursor.stored_results(): 
+    #     print(res.fetchall())
+
+    # res = mycursor.fetchall()
     # print out the result
     mycursor.close()
-    return jsonify(res)
+    # print(jsonify(res))
+    # return jsonify(res)
+
+
 
 if __name__ == "__main__":
+    # call_sp()
     app.run(host="127.0.0.1", port="5000", debug=False)
-    call_sp()
+    
