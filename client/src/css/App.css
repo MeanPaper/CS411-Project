@@ -3,7 +3,9 @@
   margin: 0;
   background-color: #000000;
 }
-
+.App{
+  min-width: 600px;
+}
 .content{
   margin-top:60px;
 }

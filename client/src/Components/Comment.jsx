@@ -13,7 +13,6 @@ const Comment = ({logInStatus, searchMessage, comments}) =>{
         }
     },[logInStatus]);
 
-    console.log(comments);
 
     const handleCommentTyping = (event) =>{
         setUserComment(event.target.value)
@@ -41,7 +40,7 @@ const Comment = ({logInStatus, searchMessage, comments}) =>{
             // console.log(dataObject)
 
             const response = await axios.put(`http://127.0.0.1:5000/insert_comment`, dataObject);
-            console.log(response);
+            // console.log(response);
         }
         catch(err){ 
             alert(err);

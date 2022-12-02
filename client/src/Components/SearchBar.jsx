@@ -15,18 +15,6 @@ const SearchBar = ({result, setResult, searchMessage, setSearchMessage, comments
     React.useEffect(()=>{
         setPreviousResult(searchMessage);
     },[result]);
-
-    // const handleDepChange = (msg) =>{ // handle on change in the text box
-    //     msg.preventDefault();
-    //     setSearchMessage(msg.target.value);
-    //     // console.log(searchMessage);
-    // }
-
-    // const handleNumChange = (msg) =>{ // handle on change in the text box
-    //     msg.preventDefault();
-    //     setSearchNum(msg.target.value);
-    //     // console.log(searchMessage);
-    // }
     
     const handleSearchMessage = (event) => {
         // event.preventDefault();
@@ -99,7 +87,7 @@ const SearchBar = ({result, setResult, searchMessage, setSearchMessage, comments
                     title="Course Department, need to letters and abbreviations"
                     name='course'
                     placeholder='Department'
-                    pattern='[A-Za-z]{2,}'
+                    pattern='[A-Za-z]{2,9}'
                     onChange={handleSearchMessage}
                     value={searchMessage.course} required></input>
 
@@ -108,7 +96,7 @@ const SearchBar = ({result, setResult, searchMessage, setSearchMessage, comments
                     className = "search-input"
                     name='courseNum'
                     placeholder='Number'
-                    pattern='[0-9]{3,}'
+                    pattern='[0-9]{3,9}'
                     onChange={handleSearchMessage}
                     value={searchMessage.courseNum} required></input>
                 <button className="course-search-button" type='submit'> Search </button>
