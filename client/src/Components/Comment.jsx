@@ -49,7 +49,7 @@ const Comment = ({logInStatus}) =>{
             </div>
         </div>
         <div className='other-user-comment'>
-            <div className='comment-text'></div>
+            <div className='comment-text'>This is Comment</div>
         </div>
     </div>);   
 }
