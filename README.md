@@ -14,3 +14,5 @@ You should make sure you keep your project root files up-to-date. Information fo
 
 ## Code Contribution
 Individual code contribution will be used to evaluate individual contribution to the project.
+
+## Video Link: https://drive.google.com/file/d/1_7LrePW_C1QRHVB-NAMTYTGphrPL-83C/view?usp=share_link
